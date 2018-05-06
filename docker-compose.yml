@@ -1,0 +1,52 @@
+version: '3.3'
+
+services:
+  nginx:
+    container_name: atlas_nginx
+    image: nginx:latest
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+  atlas:
+    container_name: atlas
+    build:
+      context: ./atlas
+    volumes:
+      - ./atlas:/usr/src
+    depends_on:
+      - redis
+      - core_database
+  atlas_1:
+    container_name: atlas_1
+    build:
+      context: ./atlas
+    volumes:
+      - ./atlas:/usr/src
+    depends_on:
+      - redis
+      - core_database
+  atlas_2:
+    container_name: atlas_2
+    build:
+      context: ./atlas
+    volumes:
+      - ./atlas:/usr/src
+    depends_on:
+      - redis
+      - core_database
+  redis:
+    container_name: atlas_redis
+    image: redis:4.0-alpine
+    ports:
+      - 6379:6379  
+  core_database:
+    container_name: neo4j
+    image: neo4j:latest
+    ports:
+      - 7474:7474
+      - 7473:7473 
+      - 7687:7687
