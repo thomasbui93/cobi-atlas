@@ -46,6 +46,7 @@ services:
   core_database:
     container_name: neo4j
     image: neo4j:latest
+    env_file: ./core-database/.env
     ports:
       - 7474:7474
       - 7473:7473 
