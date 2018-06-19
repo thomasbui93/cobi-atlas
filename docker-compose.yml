@@ -17,6 +17,7 @@ services:
       context: ./atlas
     volumes:
       - ./atlas:/usr/src
+      - /usr/src/node_modules
     depends_on:
       - redis
       - core_database
@@ -26,6 +27,7 @@ services:
       context: ./atlas
     volumes:
       - ./atlas:/usr/src
+      - /usr/src/node_modules
     depends_on:
       - redis
       - core_database
@@ -35,6 +37,7 @@ services:
       context: ./atlas
     volumes:
       - ./atlas:/usr/src
+      - /usr/src/node_modules
     depends_on:
       - redis
       - core_database
