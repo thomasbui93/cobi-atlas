@@ -1,13 +1,13 @@
-var express = require('express'),
-    http = require('http'),
-    redis = require('redis');
+import express from 'express'
+import http from 'http'
+import Redis from './database/Redis'
 
-var app = express();
+const app = express();
 
-var client = redis.createClient('6379', 'redis');
+const client = Redis.getInstance();
 
 app.get('/', function(req, res, next) {
-  client.incr('counter', function(err, counter) {
+  client.incr('counter', function(err: Error, counter: Number|String) {
     if(err) return next(err);
     res.send('This page has been viewed ' + counter + ' times!');
   });

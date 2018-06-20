@@ -1,0 +1,15 @@
+version: '3.3'
+
+services:
+  atlas:
+    container_name: atlas
+    build:
+      context: ./atlas
+      dockerfile: Dockerfile-dev
+    env_file:
+      - ./docker/.env.dist
+  core_database:
+    environment:
+      MONGO_INITDB_DATABASE: core_atlas
+      MONGO_INITDB_ROOT_USERNAME: core
+      MONGO_INITDB_ROOT_PASSWORD: core

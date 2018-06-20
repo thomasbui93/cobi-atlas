@@ -21,36 +21,16 @@ services:
     depends_on:
       - redis
       - core_database
-  atlas_1:
-    container_name: atlas_1
-    build:
-      context: ./atlas
-    volumes:
-      - ./atlas:/usr/src
-      - /usr/src/node_modules
-    depends_on:
-      - redis
-      - core_database
-  atlas_2:
-    container_name: atlas_2
-    build:
-      context: ./atlas
-    volumes:
-      - ./atlas:/usr/src
-      - /usr/src/node_modules
-    depends_on:
-      - redis
-      - core_database
   redis:
     container_name: atlas_redis
     image: redis:4.0-alpine
     ports:
       - 6379:6379  
   core_database:
-    container_name: neo4j
-    image: neo4j:latest
-    env_file: ./core-database/.env
-    ports:
-      - 7474:7474
-      - 7473:7473 
-      - 7687:7687
+    container_name: core_database
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: core_atlas
+      MONGO_INITDB_ROOT_USERNAME: core
+      MONGO_INITDB_ROOT_PASSWORD: core
