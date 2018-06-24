@@ -1,18 +1,23 @@
-import express from 'express'
-import http from 'http'
-import Redis from './database/Redis'
+import 'reflect-metadata';
+import { Express } from 'express';
+import * as bodyParser from 'body-parser';
+import { Container } from 'inversify';
+import { interfaces, InversifyExpressServer, TYPE } from 'inversify-express-utils';
+import { registerServices } from './types/register';
+import Mongo from './database/Mongo';
 
-const app = express();
+import './controllers/index';
 
-const client = Redis.getInstance();
+const container = new Container();
+registerServices(container);
 
-app.get('/', function(req, res, next) {
-  client.incr('counter', function(err: Error, counter: Number|String) {
-    if(err) return next(err);
-    res.send('This page has been viewed ' + counter + ' times!');
-  });
+const server = new InversifyExpressServer(container);
+server.setConfig((app: Express) => {
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
+  app.use(bodyParser.json());
+  Mongo.initConnection();
 });
 
-http.createServer(app).listen(process.env.PORT || 8080, function() {
-  console.log('Listening on port ' + (process.env.PORT || 8080));
-});
+server.build().listen(process.env.PORT || 8080);

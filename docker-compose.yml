@@ -23,14 +23,12 @@ services:
       - core_database
   redis:
     container_name: atlas_redis
-    image: redis:4.0-alpine
+    image: bitnami/redis:latest
     ports:
       - 6379:6379  
   core_database:
     container_name: core_database
-    image: mongo:latest
+    image: bitnami/mongodb:latest
     restart: always
-    environment:
-      MONGO_INITDB_DATABASE: core_atlas
-      MONGO_INITDB_ROOT_USERNAME: core
-      MONGO_INITDB_ROOT_PASSWORD: core
+    ports:
+      - 27017:27017

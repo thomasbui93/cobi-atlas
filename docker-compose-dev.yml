@@ -8,8 +8,11 @@ services:
       dockerfile: Dockerfile-dev
     env_file:
       - ./docker/.env.dist
+  redis:
+    environment: 
+      REDIS_PASSWORD: core
   core_database:
     environment:
-      MONGO_INITDB_DATABASE: core_atlas
-      MONGO_INITDB_ROOT_USERNAME: core
-      MONGO_INITDB_ROOT_PASSWORD: core
+      MONGODB_DATABASE: core_atlas
+      MONGODB_PASSWORD: core
+      MONGODB_USERNAME: core
