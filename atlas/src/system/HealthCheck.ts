@@ -17,7 +17,7 @@ export default class HealthCheck {
     }
 
     mongoStatus() {
-        return connection.readyState;
+        return connection.readyState === 1;
     }
 
     async databaseStatus() {

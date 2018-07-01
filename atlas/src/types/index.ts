@@ -1,3 +1,4 @@
 export default {
-    HealthCheck: Symbol('HealthCheck')
+    HealthCheck: Symbol('HealthCheck'),
+    PersonRepository: Symbol('PersonRepository')
 };

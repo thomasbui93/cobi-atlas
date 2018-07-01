@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import { interfaces, controller, httpGet, httpPost, httpDelete, request, queryParam, response, requestParam } from 'inversify-express-utils';
+import { interfaces, controller, httpGet } from 'inversify-express-utils';
 import { injectable, inject } from 'inversify';
 import HealthCheck from '../../system/HealthCheck';
 import TYPES from './../../types';
 
 @controller('/health-check')
-export class FooController implements interfaces.Controller {
+export class SystemController implements interfaces.Controller {
 
     constructor( @inject(TYPES.HealthCheck) private healthCheck: HealthCheck ) {}
 

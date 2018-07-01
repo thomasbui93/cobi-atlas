@@ -7,6 +7,7 @@ import { registerServices } from './types/register';
 import Mongo from './database/Mongo';
 
 import './controllers/index';
+import { errorHandler } from './utils/error/error-handling';
 
 const container = new Container();
 registerServices(container);
@@ -17,6 +18,7 @@ server.setConfig((app: Express) => {
     extended: true
   }));
   app.use(bodyParser.json());
+  app.use(errorHandler);
   Mongo.initConnection();
 });
 
