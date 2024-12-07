@@ -16,10 +16,10 @@
     "@types/cors": "^2.8.4",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
-    "express": "^4.16.3",
+    "express": "^4.21.2",
     "inversify": "^4.13.0",
-    "inversify-express-utils": "^6.1.0",
-    "mongoose": "^5.1.6",
+    "inversify-express-utils": "^6.4.7",
+    "mongoose": "^8.8.3",
     "redis": "^2.8.0",
     "reflect-metadata": "^0.1.12"
   },
